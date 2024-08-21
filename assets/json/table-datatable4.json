@@ -2,28 +2,28 @@
   "data": [
     {
       "id": 1,
-      "property_name": "Lorem, ipsum dolor.",
+      "property_name": "400 Paines Avenue, Atlanta GA, Atlanta, GA 30314",
       "officer_name": "Korrie O'Crevy",
       "check_in_time": "2:00",
       "check_out_time":"3:00",
-      "comment": "Lorem, ipsum dolor. Lorem, ipsum dolor."
+      "comment": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic voluptatum illo distinctio vero ratione laboriosam! Fugit fuga nostrum, adipisci atque et quas? Deserunt labore aspernatur accusamus obcaecati quaerat saepe placeat."
     },
     {
       "id": 2,
-      "property_name": "Lorem, ipsum dolor.",
+      "property_name": "400 Paines Avenue, Atlanta GA, Atlanta, GA 30314",
       "officer_name": "Korrie O'Crevy",
       "check_in_time": "2:00",
       "check_out_time":"3:00",
-      "comment": "Lorem, ipsum dolor. Lorem, ipsum dolor."
+      "comment": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic voluptatum illo distinctio vero ratione laboriosam! Fugit fuga nostrum, adipisci atque et quas? Deserunt labore aspernatur accusamus obcaecati quaerat saepe placeat."
       
     },
     {
       "id": 3,
-      "property_name": "Lorem, ipsum dolor.",
+      "property_name": "400 Paines Avenue, Atlanta GA, Atlanta, GA 30314",
       "officer_name": "Korrie O'Crevy",
       "check_in_time": "2:00",
       "check_out_time":"3:00",
-      "comment": "Lorem, ipsum dolor. Lorem, ipsum dolor."
+      "comment": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic voluptatum illo distinctio vero ratione laboriosam! Fugit fuga nostrum, adipisci atque et quas? Deserunt labore aspernatur accusamus obcaecati quaerat saepe placeat."
       
       
     }
