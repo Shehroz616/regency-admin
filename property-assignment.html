@@ -251,11 +251,11 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
-                                            <div class="priorities-list">
+                                            <div class="checkpoints-list">
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#priorityModal" class="btn btn-primary">Add Priorities</button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#checkpointModal" class="btn btn-primary">Add Checkpoints</button>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
@@ -300,17 +300,17 @@
     <!-- build:js assets/vendor/js/core.js -->
 
     <!-- Modals -->
-    <div class="modal fade" id="priorityModal" tabindex="-1" aria-labelledby="priorityModalLabel" aria-hidden="true">
+    <div class="modal fade" id="checkpointModal" tabindex="-1" aria-labelledby="checkpointModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="priorityModalLabel">Add Priority</h5>
+                    <h5 class="modal-title" id="checkpointModalLabel">Add Checkpoint</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="priorityForm">
+                    <form id="checkpointForm">
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="priorityInput" placeholder="Enter Text Here" required>
+                            <input type="text" class="form-control" id="checkpointInput" placeholder="Enter Text Here" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
@@ -345,55 +345,64 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const priorityForm = document.getElementById('priorityForm');
-            const priorityInput = document.getElementById('priorityInput');
-            const prioritiesList = document.querySelector('.priorities-list');
+            const checkpointForm = document.getElementById('checkpointForm');
+            const checkpointInput = document.getElementById('checkpointInput');
+            const checkpointsList = document.querySelector('.checkpoints-list');
             
-            function updatePrioritiesHeading() {
-                const heading = document.querySelector('.priorities-heading');
-                const items = prioritiesList.querySelectorAll('div:not(.priorities-heading)');
+            function updatecheckpointsHeading() {
+                const heading = document.querySelector('.checkpoints-heading');
+                const items = checkpointsList.querySelectorAll('div:not(.checkpoints-heading)');
                 if (items.length > 0 && !heading) {
                     // Add the heading if it doesn't exist and there are items
                     const headingElement = document.createElement('h5');
-                    headingElement.className = 'priorities-heading';
-                    headingElement.textContent = 'Priorities';
-                    prioritiesList.prepend(headingElement);
+                    headingElement.className = 'checkpoints-heading';
+                    headingElement.textContent = 'Checkpoints';
+                    checkpointsList.prepend(headingElement);
                 } else if (items.length === 0 && heading) {
                     // Remove the heading if there are no items
                     heading.remove();
                 }
             }
 
-            priorityForm.addEventListener('submit', (e) => {
+            checkpointForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 
-                const priorityText = priorityInput.value.trim();
-                if (priorityText) {
-                    const priorityItem = document.createElement('div');
-                    priorityItem.className = 'd-flex justify-content-between align-items-center mb-2';
+                const checkpointText = checkpointInput.value.trim();
+                if (checkpointText) {
+                    const checkpointItem = document.createElement('div');
+                    checkpointItem.className = 'd-flex justify-content-between align-items-center mb-2';
                     
-                    priorityItem.innerHTML = `
-                        <span>${priorityText}</span>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="removePriority(this)"><i class="ti ti-trash"></i></button>
+                    checkpointItem.innerHTML = `
+                        <span>${checkpointText}</span>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="removecheckpoint(this)"><i class="ti ti-trash"></i></button>
                     `;
 
-                    prioritiesList.appendChild(priorityItem);
-                    priorityInput.value = '';
-                    updatePrioritiesHeading(); // Update the heading based on the new state
-                    const priorityModal = bootstrap.Modal.getInstance(document.getElementById('priorityModal'));
-                    priorityModal.hide();
+                    checkpointsList.appendChild(checkpointItem);
+                    checkpointInput.value = '';
+                    updatecheckpointsHeading(); // Update the heading based on the new state
+                    const checkpointModal = bootstrap.Modal.getInstance(document.getElementById('checkpointModal'));
+                    checkpointModal.hide();
                 }
             });
             
             // Initial call to ensure heading visibility is correct on page load
-            updatePrioritiesHeading();
+            updatecheckpointsHeading();
         });
 
-        function removePriority(button) {
+        function removecheckpoint(button) {
             const item = button.parentElement;
             item.remove();
             // Update heading visibility when an item is removed
-            document.querySelector('.priorities-list').dispatchEvent(new Event('itemRemoved'));
+            document.querySelector('.checkpoints-list').dispatchEvent(new Event('itemRemoved'));
+            const checkpointsList = document.querySelector('.checkpoints-list');
+            const heading = document.querySelector('.checkpoints-heading');
+            const items = checkpointsList.querySelectorAll('div:not(.checkpoints-heading)');
+                if (items.length > 0 && !heading) {
+                   
+                } else if (items.length === 0 && heading) {
+                    // Remove the heading if there are no items
+                    heading.remove();
+                }
         }
     </script>
 </body>
