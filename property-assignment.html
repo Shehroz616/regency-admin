@@ -232,9 +232,9 @@
                                                 <label class="form-label" for="property-name">Property Name</label>
                                                 <select id="multicol-country" class="select2 form-select" data-allow-clear="true">
                                                     <option value="">Select</option>
-                                                    <option value="Australia">Australia</option>
-                                                    <option value="Bangladesh">Bangladesh</option>
-                                                    <option value="Belarus">Belarus</option>
+                                                    <option value="Australia">Atlanta GA 30314</option>
+                                                    <option value="Bangladesh">P. Brawley Drive, NW, Atlanta GA 30314</option>
+                                                    <option value="Belarus">Paines Avenue</option>
                                                   </select>
                                             </div>
                                         </div>
@@ -243,14 +243,19 @@
                                                 <label class="form-label" for="property-address">Officer Name</label>
                                                 <select id="multicol-country" class="select2 form-select" data-allow-clear="true">
                                                     <option value="">Select</option>
-                                                    <option value="Korrie O'Crevy">Korrie O'Crevy</option>
-                                                    <option value="B Korrie O'Crevy">B Korrie O'Crevy</option>
-                                                    <option value="C Korrie O'Crevy">C Korrie O'Crevy</option>
-                                                    <option value="D Korrie O'Crevy">D Korrie O'Crevy</option>
+                                                    <option value="Korrie O'Crevy">Bryan Fury</option>
+                                                    <option value="B Korrie O'Crevy">Paul Phoenix</option>
+                                                    <option value="C Korrie O'Crevy">Jack</option>
+                                                    <option value="D Korrie O'Crevy">Alisa Bosconovitch</option>
                                                   </select>
                                             </div>
                                         </div>
+                                        <div class="col-lg-3">
+                                            <div class="priorities-list">
+                                            </div>
+                                        </div>
                                     </div>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#priorityModal" class="btn btn-primary">Add Priorities</button>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
@@ -294,6 +299,27 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
+    <!-- Modals -->
+    <div class="modal fade" id="priorityModal" tabindex="-1" aria-labelledby="priorityModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="priorityModalLabel">Add Priority</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="priorityForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="priorityInput" placeholder="Enter Text Here" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="assets/vendor/libs/jquery/jquery.js"></script>
     <script src="assets/vendor/libs/popper/popper.js"></script>
     <script src="assets/vendor/js/bootstrap.js"></script>
@@ -316,6 +342,60 @@
 
     <!-- Page JS -->
     <script src="assets/js/dashboards-analytics.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const priorityForm = document.getElementById('priorityForm');
+            const priorityInput = document.getElementById('priorityInput');
+            const prioritiesList = document.querySelector('.priorities-list');
+            
+            function updatePrioritiesHeading() {
+                const heading = document.querySelector('.priorities-heading');
+                const items = prioritiesList.querySelectorAll('div:not(.priorities-heading)');
+                if (items.length > 0 && !heading) {
+                    // Add the heading if it doesn't exist and there are items
+                    const headingElement = document.createElement('h5');
+                    headingElement.className = 'priorities-heading';
+                    headingElement.textContent = 'Priorities';
+                    prioritiesList.prepend(headingElement);
+                } else if (items.length === 0 && heading) {
+                    // Remove the heading if there are no items
+                    heading.remove();
+                }
+            }
+
+            priorityForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const priorityText = priorityInput.value.trim();
+                if (priorityText) {
+                    const priorityItem = document.createElement('div');
+                    priorityItem.className = 'd-flex justify-content-between align-items-center mb-2';
+                    
+                    priorityItem.innerHTML = `
+                        <span>${priorityText}</span>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="removePriority(this)"><i class="ti ti-trash"></i></button>
+                    `;
+
+                    prioritiesList.appendChild(priorityItem);
+                    priorityInput.value = '';
+                    updatePrioritiesHeading(); // Update the heading based on the new state
+                    const priorityModal = bootstrap.Modal.getInstance(document.getElementById('priorityModal'));
+                    priorityModal.hide();
+                }
+            });
+            
+            // Initial call to ensure heading visibility is correct on page load
+            updatePrioritiesHeading();
+        });
+
+        function removePriority(button) {
+            const item = button.parentElement;
+            item.remove();
+            // Update heading visibility when an item is removed
+            document.querySelector('.priorities-list').dispatchEvent(new Event('itemRemoved'));
+        }
+    </script>
 </body>
 
 </html>
